@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
@@ -20,26 +21,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final EditText message = (EditText)findViewById(R.id.editText);
-        Button post = (Button)findViewById(R.id.button);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                post(message.getText().toString());
-            }
-        });
     }
 
-    public void post(String msg){
+    public void post(View v){
+        final EditText message = (EditText)findViewById(R.id.editText);
+        final String msg = message.getText().toString();
+
         String url = "https://hooks.slack.com/services/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";
         //Volley decalaration:
         // Instantiate the RequestQueue.
 
-        RequestQueue queue = new RequestQueue ();
+        RequestQueue queue = Volley.newRequestQueue(this);
 
         //Create JSON Object
         JSONObject jsonObject = new JSONObject();
